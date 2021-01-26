@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resource :current_user, only: :show, controller: :current_user
+
   resources :snacks, only: [:index]
 end
