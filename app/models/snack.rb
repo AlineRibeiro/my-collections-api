@@ -1,6 +1,7 @@
 class Snack < ApplicationRecord
   belongs_to :user
 
-  validate :name, :description, presence: true
+  validates :name, :description, presence: true
+  validates :name, uniqueness: true
   validates :description, length: { minimum: 20 }
 end
