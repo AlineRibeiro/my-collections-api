@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Snack, type: :model do
@@ -7,7 +9,6 @@ RSpec.describe Snack, type: :model do
 
   describe 'validations' do
     let(:snack) { FactoryBot.create(:snack) }
-
 
     it { should validate_presence_of(:name) }
 
