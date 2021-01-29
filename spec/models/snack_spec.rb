@@ -12,7 +12,7 @@ RSpec.describe Snack, type: :model do
 
     it { should validate_presence_of(:name) }
 
-    it { expect(snack).to validate_uniqueness_of(:name) }
+    it { expect(snack).to validate_uniqueness_of(:name).case_insensitive }
 
     it { should validate_presence_of(:description) }
 
