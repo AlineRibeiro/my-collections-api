@@ -9,12 +9,12 @@ RSpec.describe SnacksController, type: :controller do
 
   let(:valid_request) do
     post :create, params: { snack: { name: 'TestSnack', description: 'This is the description for test snack' } },
-         as: :json
+                  as: :json
   end
 
   let(:invalid_request) do
     post :create, params: { snack: { name: '', description: '' } },
-         as: :json
+                  as: :json
   end
 
   describe '#index' do
