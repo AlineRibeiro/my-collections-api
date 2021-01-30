@@ -14,7 +14,7 @@ class SnacksController < ApplicationController
     snack.user = current_user
     if snack.save
       render json: snack, status: :created
-      SnackMailer.snack_creation(current_user).deliver_now
+      SnackMailer.snack_creation
     else
       render(
         json: { errors: snack.errors.full_messages },
