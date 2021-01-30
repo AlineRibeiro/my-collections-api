@@ -1,18 +1,18 @@
 class SnackMailer < ApplicationMailer
   default from: "alinear.mail+1@example.com"
 
-  def self.snack_creation
+  def self.snack_creation(snack)
     admins = User.admins
     mail_list = admins.map { |admin| admin.email }
 
     mail_list.each do |email|
-      send_snack_creation(email).deliver_now
+      send_snack_creation(email, snack).deliver_now
     end
   end
 
-  def send_snack_creation(email)
+  def send_snack_creation(email, snack)
     @email = email
-    @url  = 'http://example.com/login'
-    mail(to: email, subject: 'Snack has been created')
+    @snack_name = snack.name
+    mail(to: email, subject: "Snack #{@snack_name} has been created")
   end
 end
