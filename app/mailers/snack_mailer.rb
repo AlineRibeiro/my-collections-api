@@ -1,5 +1,4 @@
 class SnackMailer < ApplicationMailer
-  default from: "alinear.mail+1@example.com"
 
   def self.snack_creation(snack)
     admins = User.admins
