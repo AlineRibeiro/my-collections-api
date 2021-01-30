@@ -1,8 +1,9 @@
-class SnackMailer < ApplicationMailer
+# frozen_string_literal: true
 
+class SnackMailer < ApplicationMailer
   def self.snack_creation(snack)
     admins = User.admins
-    mail_list = admins.map { |admin| admin.email }
+    mail_list = admins.map(&:email)
 
     mail_list.each do |email|
       notify_snack_creation(email, snack).deliver_now

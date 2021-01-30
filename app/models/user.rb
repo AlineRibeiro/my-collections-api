@@ -8,5 +8,5 @@ class User < ApplicationRecord
 
   has_many :snacks
 
-  scope :admins, -> { where(admin: true)  }
+  scope :admins, -> { where(admin: true) }
 end
