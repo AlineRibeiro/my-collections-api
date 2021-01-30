@@ -40,23 +40,22 @@ RSpec.describe SnacksController, type: :controller do
         expect(response.parsed_body['name']).to eq('TestSnack')
       end
 
-      it "sends out an email for each admin" do
+      it 'sends out an email for each admin' do
         sign_in user
 
         expect(SnackMailer).to receive(:snack_creation).and_call_original
 
         valid_request
       end
-
     end
 
-      context 'with user and invalid params' do
-        it 'returns an error' do
-          sign_in user
-          invalid_request
-          
-          expect(response).to have_http_status(:unprocessable_entity)
-        end
+    context 'with user and invalid params' do
+      it 'returns an error' do
+        sign_in user
+        invalid_request
+
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
+end
