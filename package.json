@@ -1,5 +1,5 @@
 {
-  "name": "snackrism-api",
+  "name": "my-collections-api",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
