@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SnackSerializer < ActiveModel::Serializer
+class CollectionSerializer < ActiveModel::Serializer
   attributes :id, :name, :description, :owner_email
 
   def owner_email

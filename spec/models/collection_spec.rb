@@ -2,17 +2,17 @@
 
 require 'rails_helper'
 
-RSpec.describe Snack, type: :model do
+RSpec.describe Collection, type: :model do
   describe 'associations' do
     it { should belong_to(:user) }
   end
 
   describe 'validations' do
-    let(:snack) { FactoryBot.create(:snack) }
+    let(:collection) { FactoryBot.create(:collection) }
 
     it { should validate_presence_of(:name) }
 
-    it { expect(snack).to validate_uniqueness_of(:name).case_insensitive }
+    it { expect(collection).to validate_uniqueness_of(:name).case_insensitive }
 
     it { should validate_presence_of(:description) }
 

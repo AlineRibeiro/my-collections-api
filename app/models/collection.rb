@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Snack < ApplicationRecord
+class Collection < ApplicationRecord
   belongs_to :user
 
   validates :name, :description, presence: true
