@@ -2,24 +2,24 @@
 
 require 'rails_helper'
 
-RSpec.describe SnacksController, type: :controller do
+RSpec.describe CollectionsController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
 
-  let(:snack) { FactoryBot.create(:snack) }
+  let(:collection) { FactoryBot.create(:collection) }
 
   let(:valid_request) do
-    post :create, params: { snack: { name: 'TestSnack', description: 'This is the description for test snack' } },
+    post :create, params: { collection: { name: 'TestCollection', description: 'This is the description for test collection' } },
                   as: :json
   end
 
   let(:invalid_request) do
-    post :create, params: { snack: { name: '', description: '' } },
+    post :create, params: { collection: { name: '', description: '' } },
                   as: :json
   end
 
   describe '#index' do
     it 'returns a json response' do
-      snack
+      collection
       get :index
       expect(response.parsed_body.first['name']).to eq('TestProduct')
     end
@@ -34,16 +34,16 @@ RSpec.describe SnacksController, type: :controller do
     end
 
     context 'with user and valid params' do
-      it ' creates a snack' do
+      it ' creates a collection' do
         sign_in user
         valid_request
-        expect(response.parsed_body['name']).to eq('TestSnack')
+        expect(response.parsed_body['name']).to eq('TestCollection')
       end
 
       it 'sends out an email for each admin' do
         sign_in user
 
-        expect(SnackMailer).to receive(:snack_creation).and_call_original
+        expect(CollectionMailer).to receive(:collection_creation).and_call_original
 
         valid_request
       end
