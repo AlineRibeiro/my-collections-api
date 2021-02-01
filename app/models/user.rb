@@ -7,4 +7,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :snacks
+
+  scope :admins, -> { where(admin: true) }
 end
