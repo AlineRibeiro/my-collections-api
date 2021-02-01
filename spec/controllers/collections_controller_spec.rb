@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe CollectionController, type: :controller do
+RSpec.describe CollectionsController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
 
   let(:collection) { FactoryBot.create(:collection) }
