@@ -5,7 +5,7 @@ class CollectionsController < ApplicationController
   before_action :find_collection, only: %i[show update]
 
   def index
-    collections= Collection.all
+    collections = Collection.all
     render json: collections
   end
 

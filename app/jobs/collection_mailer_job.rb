@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CollectionMailerJob < ApplicationJob
   queue_as :default
 
