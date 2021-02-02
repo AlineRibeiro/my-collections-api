@@ -14,7 +14,7 @@ class CollectionsController < ApplicationController
     collection.user = current_user
     if collection.save
       render json: collection, status: :created
-      CollectionMailer.collection_creation(collection)
+      CollectionMailerJob.perform_later(collection.id)
     else
       render(
         json: { errors: collection.errors.full_messages },
