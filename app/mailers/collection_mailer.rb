@@ -5,7 +5,7 @@ class CollectionMailer < ApplicationMailer
     mail_list = User.admins.pluck(:email)
 
     mail_list.each do |email|
-      notify_collection_creation(email, collection).deliver_now
+      notify_collection_creation(email, collection).deliver_later
     end
   end
 
