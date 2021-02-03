@@ -40,12 +40,12 @@ RSpec.describe CollectionsController, type: :controller do
         expect(response.parsed_body['name']).to eq('TestCollection')
       end
 
-      it 'sends out an email for each admin' do
+      it 'enqueues an active job to send out an email for each admin' do
         sign_in user
 
-        expect(CollectionMailer).to receive(:collection_creation).and_call_original
+        ActiveJob::Base.queue_adapter = :test
 
-        valid_request
+        expect { valid_request }.to have_enqueued_job
       end
     end
 
