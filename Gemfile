@@ -21,6 +21,7 @@ gem 'webpacker', '~> 5.0'
 gem 'active_model_serializers'
 
 gem 'sidekiq'
+gem 'money-rails', '~>1.12'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
