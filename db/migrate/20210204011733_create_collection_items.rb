@@ -4,8 +4,8 @@ class CreateCollectionItems < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :description
       t.string :maker
-      t.monetize :price_paid
-      t.monetize :current_value
+      t.decimal :paid_price
+      t.decimal :current_value
       t.string :serial_number
       t.string :origin
       t.integer :circa
