@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CollectionItemsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
   before_action :set_collection,  only: [:create]
   before_action :find_collection_item, only: %i[show update destroy]
 
