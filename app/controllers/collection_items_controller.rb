@@ -2,6 +2,7 @@
 
 class CollectionItemsController < ApplicationController
   before_action :set_collection,  only: [:create]
+  before_action :find_collection_item, only: %i[show update destroy]
 
   def index
     collection_items = CollectionItem.all
@@ -10,7 +11,7 @@ class CollectionItemsController < ApplicationController
 
   def create
     collection_item = CollectionItem.new collection_item_params
-    collection_item.collection = @collection_id
+    collection_item.collection_id = @collection.id
     if collection_item.save
       render json: collection_item, status: :created
     else
@@ -20,36 +21,23 @@ class CollectionItemsController < ApplicationController
   end
 
   def show
-    collection_item_id = params[:id]
-    collection_id = params[:collection_id]
-    collection_item = CollectionItem.find_by(collection_id: collection_id, id: collection_item_id)
-    if collection_item
-      render json: collection_item
-    else
-      render json: { errors: 'This item does not exist' }
-    end
+    render json: @collection_item if @collection_item
   end
 
   def update
-    collection_item_id = params[:id]
-    collection_id = params[:collection_id]
-    collection_item = CollectionItem.find_by(collection_id: collection_id, id: collection_item_id)
-    if collection_item.update(collection_item_params)
-      render json: collection_item
+    if @collection_item.update(collection_item_params)
+      render json: @collection_item
     else
-      render json: { errors: collection_item.errors.full_messages },
+      render json: { errors: @collection_item.errors.full_messages },
              status: :unprocessable_entity
     end
   end
 
   def destroy
-    collection_item_id = params[:id]
-    collection_id = params[:collection_id]
-    collection_item = CollectionItem.find_by(collection_id: collection_id, id: collection_item_id)
-    if collection_item.delete
+    if @collection_item.delete
       render json: { message: 'Item had been deleted' }
     else
-      render json: { errors: collection_item.errors.full_messages },
+      render json: { errors: @collection_item.errors.full_messages },
              status: :unprocessable_entity
     end
   end
@@ -62,9 +50,12 @@ class CollectionItemsController < ApplicationController
   end
 
   def set_collection
-    @collection_id = Collection.find(params[:collection_id])
+    @collection = Collection.find(params[:collection_id])
   end
 
+  def find_collection_item
+    @collection_item = CollectionItem.find_by(collection_id: params[:collection_id], id: params[:id])
 
-
+    render json: { error: 'Item does not exist' } if @collection_item.nil?
+  end
 end
