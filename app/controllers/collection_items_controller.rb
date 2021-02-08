@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
 class CollectionItemsController < ApplicationController
+  before_action :set_collection,  only: [:create]
+
   def index
     collection_items = CollectionItem.all
     render json: collection_items
   end
 
   def create
-    collection_id = params[:collection_id]
     collection_item = CollectionItem.new collection_item_params
-    collection_item.collection = Collection.find(collection_id)
+    collection_item.collection = @collection_id
     if collection_item.save
       render json: collection_item, status: :created
     else
@@ -59,4 +60,11 @@ class CollectionItemsController < ApplicationController
     params.require(:collection_item).permit(:name, :description, :maker, :paid_price, :current_value, :serial_number,
                                             :origin, :circa, :condition, :signed)
   end
+
+  def set_collection
+    @collection_id = Collection.find(params[:collection_id])
+  end
+
+
+
 end
