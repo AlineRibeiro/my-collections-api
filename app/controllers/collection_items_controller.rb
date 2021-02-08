@@ -29,6 +29,18 @@ class CollectionItemsController < ApplicationController
     end
   end
 
+  def update
+    collection_item_id = params[:id]
+    collection_id = params[:collection_id]
+    collection_item = CollectionItem.find_by(collection_id: collection_id, id: collection_item_id)
+    if collection_item.update(collection_item_params)
+      render json: collection_item
+    else
+      render json: { errors: collection_item.errors.full_messages },
+             status: :unprocessable_entity
+    end
+  end
+
   private
 
   def collection_item_params
