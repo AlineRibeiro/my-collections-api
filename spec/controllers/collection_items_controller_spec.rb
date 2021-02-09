@@ -125,4 +125,36 @@ RSpec.describe CollectionItemsController, type: :controller do
       end
     end
   end
+
+  describe '#destroy' do
+    let(:valid_request) do
+      delete :destroy, params: { collection_id: collection_item.collection.id,
+                             id: collection_item.id },
+          as: :json
+    end
+
+    context 'with guest user' do
+      it 'returns an error' do
+        valid_request
+        expect(response.parsed_body['error']).to eq('You need to sign in or sign up before continuing.')
+      end
+    end
+
+    context 'with user who is the collection owner' do
+      it 'returns an error' do
+        sign_in collection_item.collection.user
+        valid_request
+
+        expect(response.parsed_body['message']).to eq('Item had been deleted')
+      end
+    end
+
+    context 'with user who is not the collection owner' do
+      it 'returns an error' do
+        sign_in user
+
+        expect { valid_request }.to raise_error Pundit::NotAuthorizedError
+      end
+    end
+  end
 end
