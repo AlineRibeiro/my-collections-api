@@ -66,4 +66,11 @@ RSpec.describe CollectionItemsController, type: :controller do
       end
     end
   end
+
+  describe '#show' do
+    it 'returns a json response' do
+      get :show, params: { collection_id: collection_item.collection.id, id: collection_item.id }
+      expect(response.parsed_body['name']).to eq('CollectionItem name')
+    end
+  end
 end
