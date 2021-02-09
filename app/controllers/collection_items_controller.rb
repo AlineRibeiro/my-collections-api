@@ -12,7 +12,8 @@ class CollectionItemsController < ApplicationController
 
   def create
     collection_item = CollectionItem.new collection_item_params
-    collection_item.collection_id = @collection.id
+    collection_item.collection = @collection
+    authorize collection_item
     if collection_item.save
       render json: collection_item, status: :created
     else
