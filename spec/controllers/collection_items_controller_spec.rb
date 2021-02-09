@@ -5,6 +5,8 @@ require 'rails_helper'
 RSpec.describe CollectionItemsController, type: :controller do
   let(:collection_item) { FactoryBot.create(:collection_item) }
 
+  let(:user) { FactoryBot.create(:user, email: 'user2@email.com') }
+
   describe '#index' do
     it 'returns a json response' do
       get :index, params: { collection_id: collection_item.collection.id }
@@ -24,6 +26,14 @@ RSpec.describe CollectionItemsController, type: :controller do
                     as: :json
     end
 
+    let(:invalid_request) do
+      post :create, params: { collection_id: collection.id,
+                              collection_item: {
+                                name: ''
+                              } },
+                    as: :json
+    end
+
     context 'with guest user' do
       it 'returns an error' do
         valid_request
@@ -31,29 +41,29 @@ RSpec.describe CollectionItemsController, type: :controller do
       end
     end
 
-    # context 'with user and valid params' do
-    #   it ' creates a collection' do
-    #     sign_in user
-    #     valid_request
-    #     expect(response.parsed_body['name']).to eq('TestCollection')
-    #   end
-    #
-    #   it 'enqueues an active job to send out an email for each admin' do
-    #     sign_in user
-    #
-    #     ActiveJob::Base.queue_adapter = :test
-    #
-    #     expect { valid_request }.to have_enqueued_job
-    #   end
-    # end
+    context 'with user and valid params' do
+      it ' creates a collection' do
+        sign_in collection.user
+        valid_request
+        expect(response.parsed_body['name']).to eq('Test CollectionItem')
+      end
 
-    # context 'with user and invalid params' do
-    #   it 'returns an error' do
-    #     sign_in user
-    #     invalid_request
-    #
-    #     expect(response).to have_http_status(:unprocessable_entity)
-    #   end
-    # end
+      context 'with user and invalid params' do
+        it 'returns an error' do
+          sign_in collection.user
+          invalid_request
+
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+      end
+
+      context 'with user who is not the collection owner' do
+        it 'returns an error' do
+          sign_in user
+
+          expect { valid_request }.to raise_error Pundit::NotAuthorizedError
+        end
+      end
+    end
   end
 end
