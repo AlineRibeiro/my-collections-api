@@ -75,23 +75,22 @@ RSpec.describe CollectionItemsController, type: :controller do
   end
 
   describe '#update' do
-
     let(:valid_request) do
       put :update, params: { collection_id: collection_item.collection.id,
                              id: collection_item.id,
-                              collection_item: {
-                                  name: 'Test CollectionItem updated',
-                              } },
-           as: :json
+                             collection_item: {
+                               name: 'Test CollectionItem updated'
+                             } },
+                   as: :json
     end
 
     let(:invalid_request) do
       put :update, params: { collection_id: collection_item.collection.id,
-                              id: collection_item.id,
-                              collection_item: {
-                                  name: ''
-                              } },
-           as: :json
+                             id: collection_item.id,
+                             collection_item: {
+                               name: ''
+                             } },
+                   as: :json
     end
 
     context 'with guest user' do
@@ -107,23 +106,23 @@ RSpec.describe CollectionItemsController, type: :controller do
         valid_request
         expect(response.parsed_body['name']).to eq('Test CollectionItem updated')
       end
-      end
+    end
 
-      context 'with user and invalid params' do
-        it 'returns an error' do
-          sign_in collection_item.collection.user
-          invalid_request
+    context 'with user and invalid params' do
+      it 'returns an error' do
+        sign_in collection_item.collection.user
+        invalid_request
 
-          expect(response).to have_http_status(:unprocessable_entity)
-        end
-      end
-
-      context 'with user who is not the collection owner' do
-        it 'returns an error' do
-          sign_in user
-
-          expect { valid_request }.to raise_error Pundit::NotAuthorizedError
-        end
-        end
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
+
+    context 'with user who is not the collection owner' do
+      it 'returns an error' do
+        sign_in user
+
+        expect { valid_request }.to raise_error Pundit::NotAuthorizedError
+      end
+    end
+  end
+end
