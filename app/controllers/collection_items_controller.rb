@@ -27,6 +27,7 @@ class CollectionItemsController < ApplicationController
   end
 
   def update
+    authorize @collection_item
     if @collection_item.update(collection_item_params)
       render json: @collection_item
     else
@@ -36,6 +37,7 @@ class CollectionItemsController < ApplicationController
   end
 
   def destroy
+    authorize @collection_item
     if @collection_item.delete
       render json: { message: 'Item had been deleted' }
     else

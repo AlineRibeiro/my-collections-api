@@ -9,4 +9,12 @@ class CollectionItemPolicy < ApplicationPolicy
     def create?
       collection_item.collection.user == user || user.admin?
     end
+
+    def update?
+      collection_item.collection.user == user || user.admin?
+    end
+
+    def destroy?
+      collection_item.collection.user == user || user.admin?
+    end
 end
