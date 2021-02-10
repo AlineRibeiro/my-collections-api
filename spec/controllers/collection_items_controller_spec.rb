@@ -129,8 +129,8 @@ RSpec.describe CollectionItemsController, type: :controller do
   describe '#destroy' do
     let(:valid_request) do
       delete :destroy, params: { collection_id: collection_item.collection.id,
-                             id: collection_item.id },
-          as: :json
+                                 id: collection_item.id },
+                       as: :json
     end
 
     context 'with guest user' do
