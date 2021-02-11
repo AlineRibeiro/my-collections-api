@@ -1,5 +1,5 @@
 {
-  "name": "my-collections-api",
+  "name": "one-year-in-api",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
