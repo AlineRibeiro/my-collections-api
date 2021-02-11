@@ -10,7 +10,7 @@ FactoryBot.define do
     serial_number { 'Serial1020' }
     origin { 'MyOrigin' }
     circa { 2010 }
-    condition { 1 }
+    condition { 'good' }
     signed { false }
     collection
   end
