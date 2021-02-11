@@ -11,5 +11,5 @@ Rails.application.routes.draw do
 
   resource :current_user, only: :show, controller: :current_user
 
-  resources :collections, only: %i[create update show index]
+  resources :companies, only: %i[create update show index]
 end

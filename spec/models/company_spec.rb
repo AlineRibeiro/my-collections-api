@@ -2,17 +2,17 @@
 
 require 'rails_helper'
 
-RSpec.describe Collection, type: :model do
+RSpec.describe Company, type: :model do
   describe 'associations' do
     it { should belong_to(:user) }
   end
 
   describe 'validations' do
-    let(:collection) { FactoryBot.create(:collection) }
+    let(:company) { FactoryBot.create(:company) }
 
     it { should validate_presence_of(:name) }
 
-    it { expect(collection).to validate_uniqueness_of(:name).case_insensitive }
+    it { expect(company).to validate_uniqueness_of(:name).case_insensitive }
 
     it { should validate_presence_of(:description) }
 
