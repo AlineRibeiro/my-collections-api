@@ -12,26 +12,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_204_011_733) do
+ActiveRecord::Schema.define(version: 20_210_201_183_637) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
-
-  create_table 'collection_items', force: :cascade do |t|
-    t.string 'name'
-    t.string 'description'
-    t.string 'maker'
-    t.decimal 'paid_price'
-    t.decimal 'current_value'
-    t.string 'serial_number'
-    t.string 'origin'
-    t.integer 'circa'
-    t.integer 'condition'
-    t.boolean 'signed'
-    t.bigint 'collection_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['collection_id'], name: 'index_collection_items_on_collection_id'
-  end
 
   create_table 'collections', force: :cascade do |t|
     t.string 'name'
@@ -55,6 +38,5 @@ ActiveRecord::Schema.define(version: 20_210_204_011_733) do
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
-  add_foreign_key 'collection_items', 'collections'
   add_foreign_key 'collections', 'users'
 end

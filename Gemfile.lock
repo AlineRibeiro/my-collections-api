@@ -132,8 +132,6 @@ GEM
     pg (1.2.3)
     puma (5.1.1)
       nio4r (~> 2.0)
-    pundit (2.1.0)
-      activesupport (>= 3.0.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-cors (1.1.1)
@@ -272,7 +270,6 @@ DEPENDENCIES
   listen (~> 3.3)
   pg (~> 1.1)
   puma (~> 5.0)
-  pundit
   rack-cors
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.1)
