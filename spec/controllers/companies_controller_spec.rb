@@ -2,26 +2,26 @@
 
 require 'rails_helper'
 
-RSpec.describe CollectionsController, type: :controller do
+RSpec.describe CompaniesController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
 
-  let(:collection) { FactoryBot.create(:collection) }
+  let(:company) { FactoryBot.create(:company) }
 
   let(:valid_request) do
-    post :create, params: { collection: { name: 'TestCollection', description: 'This is the description for test collection' } },
+    post :create, params: { company: { name: 'TestCompany', description: 'This is the description for test company' } },
                   as: :json
   end
 
   let(:invalid_request) do
-    post :create, params: { collection: { name: '', description: '' } },
+    post :create, params: { company: { name: '', description: '' } },
                   as: :json
   end
 
   describe '#index' do
     it 'returns a json response' do
-      collection
+      company
       get :index
-      expect(response.parsed_body.first['name']).to eq('TestProduct')
+      expect(response.parsed_body.first['name']).to eq('TestCompany')
     end
   end
 
@@ -34,10 +34,10 @@ RSpec.describe CollectionsController, type: :controller do
     end
 
     context 'with user and valid params' do
-      it ' creates a collection' do
+      it ' creates a company' do
         sign_in user
         valid_request
-        expect(response.parsed_body['name']).to eq('TestCollection')
+        expect(response.parsed_body['name']).to eq('TestCompany')
       end
 
       it 'enqueues an active job to send out an email for each admin' do

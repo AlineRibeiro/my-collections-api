@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CollectionSerializer < ActiveModel::Serializer
+class CompanySerializer < ActiveModel::Serializer
   attributes :id, :name, :description, :owner_email
 
   def owner_email

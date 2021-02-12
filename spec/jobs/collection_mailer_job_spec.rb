@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe CollectionMailerJob, type: :job do
-  let(:collection) { FactoryBot.create(:collection) }
+RSpec.describe CompanyMailerJob, type: :job do
+  let(:company) { FactoryBot.create(:company) }
 
-  it 'sends out an email on collection creation' do
-    expect(CollectionMailer).to receive(:collection_creation).and_call_original
+  it 'sends out an email on company creation' do
+    expect(CompanyMailer).to receive(:company_creation).and_call_original
 
-    CollectionMailerJob.new.perform(collection.id)
+    CompanyMailerJob.new.perform(company.id)
   end
 end

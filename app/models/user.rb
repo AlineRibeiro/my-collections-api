@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :collections
+  has_many :companies
 
   scope :admins, -> { where(admin: true) }
 end
