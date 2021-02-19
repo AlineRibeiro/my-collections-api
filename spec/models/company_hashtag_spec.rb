@@ -6,9 +6,9 @@ RSpec.describe CompanyHashtag, type: :model do
   let(:company_hashtag) { FactoryBot.create(:company_hashtag) }
 
   describe 'associations' do
-    it { should belong_to(:hashtag) }
+    it { is_expected.to belong_to(:hashtag) }
 
-    it { should belong_to(:company) }
+    it { is_expected.to belong_to(:company) }
   end
 
   describe 'validations' do
