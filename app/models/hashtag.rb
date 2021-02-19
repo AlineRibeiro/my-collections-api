@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Hashtag < ApplicationRecord
   has_many :company_hashtags
   has_many :companies, through: :company_hashtags
