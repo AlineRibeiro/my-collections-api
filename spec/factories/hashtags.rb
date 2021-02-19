@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :hashtag do
-    name { 'MyHashtag' }
+    name { 'hashtag' }
   end
 end
