@@ -5,6 +5,10 @@ require 'rails_helper'
 RSpec.describe Company, type: :model do
   describe 'associations' do
     it { should belong_to(:user) }
+
+    it { should have_many(:company_hashtags) }
+
+    it { should have_many(:hashtags).through(:company_hashtags) }
   end
 
   describe 'validations' do
