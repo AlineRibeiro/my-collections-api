@@ -14,8 +14,8 @@ RSpec.describe CompanyHashtag, type: :model do
   describe 'validations' do
     it {
       expect(company_hashtag).to validate_uniqueness_of(:hashtag_id)
-                                     .scoped_to(:company_id)
-                                     .with_message('This hashtag has already been assigned to this business')
+        .scoped_to(:company_id)
+        .with_message('This hashtag has already been assigned to this business')
     }
   end
 end
