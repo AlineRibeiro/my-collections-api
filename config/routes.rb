@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   resource :current_user, only: :show, controller: :current_user
 
   resources :companies, only: %i[create update show index]
+
+  resources :hashtags, only: %i[create update show index]
 end
